@@ -3,7 +3,7 @@ package aws
 import java.io.File
 
 import aws.model._
-import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.auth.{AWSCredentials, BasicAWSCredentials}
 import com.amazonaws.regions.RegionUtils
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.PutObjectRequest
@@ -30,7 +30,7 @@ object S3Client {
     S3Client(bucketName, awsCreds)
   }
 
-  def apply(bucketName: String, credentials: BasicAWSCredentials): S3Client = {
+  def apply(bucketName: String, credentials: AWSCredentials): S3Client = {
     val client = new AmazonS3Client(credentials)
     new S3Client(bucketName, client)
   }
