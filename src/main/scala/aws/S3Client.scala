@@ -25,9 +25,13 @@ object S3Client {
 
   def apply(bucketName: String, client: AmazonS3Client) = new S3Client(bucketName, client)
 
-  def apply(bucketName: String, accessKey: String, secretKey: String) = {
+  def apply(bucketName: String, accessKey: String, secretKey: String): S3Client = {
     val awsCreds = new BasicAWSCredentials(accessKey, secretKey)
-    var client = new AmazonS3Client(awsCreds)
+    S3Client(bucketName, awsCreds)
+  }
+
+  def apply(bucketName: String, credentials: BasicAWSCredentials): S3Client = {
+    val client = new AmazonS3Client(credentials)
     new S3Client(bucketName, client)
   }
 }

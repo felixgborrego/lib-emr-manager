@@ -1,7 +1,7 @@
 package aws.emr
 
 import aws.emr.impl._
-import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.auth.{ AWSCredentials, BasicAWSCredentials }
 import com.amazonaws.regions.RegionUtils
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceAsyncClient
 import com.amazonaws.services.elasticmapreduce.model._
@@ -12,9 +12,13 @@ import scala.collection.JavaConversions._
 
 object EmrClient {
 
-  def apply(bucketName: String, accessKey: String, secretKey: String) = {
+  def apply(bucketName: String, accessKey: String, secretKey: String): EmrClient = {
     val awsCreds = new BasicAWSCredentials(accessKey, secretKey)
-    val awsClient = new AmazonElasticMapReduceAsyncClient(awsCreds)
+    EmrClient(bucketName, awsCreds)
+  }
+
+  def apply(bucketName: String, credentials: AWSCredentials) = {
+    val awsClient = new AmazonElasticMapReduceAsyncClient(credentials)
     new EmrClient(bucketName, awsClient)
   }
 
