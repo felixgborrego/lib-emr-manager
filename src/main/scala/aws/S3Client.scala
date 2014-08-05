@@ -25,7 +25,7 @@ object S3Client {
 
   def apply(bucketName: String, client: AmazonS3Client) = new S3Client(bucketName, client)
 
-  def apply(accessKey: String, secretKey: String, bucketName: String) = {
+  def apply(bucketName: String, accessKey: String, secretKey: String) = {
     val awsCreds = new BasicAWSCredentials(accessKey, secretKey)
     var client = new AmazonS3Client(awsCreds)
     new S3Client(bucketName, client)
@@ -36,11 +36,9 @@ class S3Client(bucketName: String, client: AmazonS3Client) {
   client.setRegion(RegionUtils.getRegion(Regions.EU_WEST_1))
 
   def deploy(file: File) = Future {
-    try {
-      val keyName = s"jars/tmp/${file.getName}"
-      client.putObject(new PutObjectRequest(bucketName, keyName, file))
-      Right("s3://" + bucketName + "/" + keyName)
-    } catch { case e: Exception => Left(e) }
+    val keyName = s"jars/tmp/${file.getName}"
+    client.putObject(new PutObjectRequest(bucketName, keyName, file))
+    "s3://" + bucketName + "/" + keyName
   }
 }
 
