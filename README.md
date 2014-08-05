@@ -1,9 +1,6 @@
-Prototype Scala client for Amazon Elastic Map Reduce
-====================================================
+Work in progress...
 
 ## Description
-
-Work in progress ...
 
 Scala library to manager an Amazon Elastic Map Reduce cluster.
 It allows you to create clusters and launch Hadoop jobs on demand.
