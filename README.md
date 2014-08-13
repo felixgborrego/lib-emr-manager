@@ -1,19 +1,20 @@
-Work in progress...
+Note: Work in progress...
 
 ## Description
 
-Scala library to manager an Amazon Elastic Map Reduce cluster.
-It allows you to create clusters and launch Hadoop jobs on demand.
+Scala library to manage an cluster in Amazon Elastic Map Reduce.
+It allows you to create a Hadoop cluster in EC2, launch your task in the cluster, get the results and shutdown the cluster on demand from your Scala code.
+
 
 ## Usage
 
-The following code will create a new cluster with 2 EC2 micro instances and execute the Hadoop task inside emr-job.jar 
+The following code will create a new cluster with 2 EC2 micro instances, wait until the cluster is ready, execute the Hadoop task inside emr-job.jar and shutdown the cluster. 
 
 ```scala
 // Create new Amazon EMR client
 val emrClient = EmrClient("test", access_key_id, secret_access_key)
 
-// Create a new cluster
+// Create a new cluster and get a future cluster running
 val cluster:Future[ClusterRunning] = emrClient.createCluster(MicroCluster)
 
 // Execute a new task  in the cluster
@@ -22,9 +23,9 @@ val job:Future[TaskRunning] = cluster.flatMap {
 }
 ```
 
-## Roadmap
+## TODO
 
-this project is still in an early stage, there are many things that should be improved:
+This project is still in an early stage, there are many things that should be improved:
 
 - [ ] Get cluster status
 - [ ] Stop cluster
