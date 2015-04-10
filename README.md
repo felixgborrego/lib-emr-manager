@@ -5,6 +5,8 @@ Note: Work in progress...
 Scala library to manage an cluster in Amazon Elastic Map Reduce.
 It allows you to create a Hadoop cluster in EC2, launch your task in the cluster, get the results and shutdown the cluster on demand from your Scala code.
 
+## Experimental
+This lib is in an early stage. Do not use this with any expectation of stability, what is here is just an experiment over the weekend, and would need more work to reach a point where it could be used as a base for anything else.
 
 ## Usage
 
